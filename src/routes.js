@@ -1,12 +1,12 @@
 import React from 'react'
 import { Route, BrowserRouter } from 'react-router-dom'
 
-import Welcome from './components/Welcome'
+import VisableWelcome from './components/Welcome'
 
 const HomeRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
     <>
-      <Welcome {...props}/>
+      <VisableWelcome {...props}/>
     </>
   )}/>
 )

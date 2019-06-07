@@ -1,7 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
+
+import { addFromAddress, addToAddress } from '../redux/actions'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -22,36 +24,45 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Welcome = props => {
-  const classes = useStyles()
-  const [values, setValues] = React.useState({ toAddress: 'Cat in the Hat', fromAddress: '123 fake street' })
+  console.log({ props })
+  const { dispatch, state } = props
 
-  const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value })
-    console.log({ ...values })
-  }
+  const classes = useStyles()
+
+  // const handleChange = name => event => {
+
+  // }
 
   return (
     <>
-    <TextField
-      required
-      id="standard-required"
-      label="To"
-      value={values.toAddress}
-      onChange={handleChange('toAddress')}
-      className={classes.textField}
-      margin="normal"
-    />
-    <TextField
-      required
-      id="standard-required"
-      label="From"
-      value={values.fromAddress}
-      onChange={handleChange('fromAddress')}
-      className={classes.textField}
-      margin="normal"
-    />
-  </>
+
+      <TextField
+        required
+        id="standard-required"
+        label="To"
+        value={state.toAddress}
+        onChange={e => dispatch(addToAddress(e.target.value))}
+        className={classes.textField}
+        margin="normal"
+      />
+
+      <TextField
+        required
+        id="standard-required"
+        label="From"
+        value={state.fromAddress}
+        onChange={e => dispatch(addFromAddress(e.target.value))}
+        className={classes.textField}
+        margin="normal"
+      />
+
+    </>
   )
 }
 
-export default Welcome
+function mapStateToProps (state) {
+  console.log(state)
+  return { state }
+}
+
+export default connect(mapStateToProps)(Welcome)
