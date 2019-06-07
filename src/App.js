@@ -2,7 +2,7 @@ import React from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
-import Welcome from './components/Welcome'
+import Routes from './routes'
 
 const theme = createMuiTheme({
   palette: {
@@ -21,7 +21,7 @@ function App () {
       <CssBaseline />
 
       <MuiThemeProvider theme={theme}>
-        <Welcome />
+        <Routes />
       </MuiThemeProvider>
 
     </React.Fragment>
