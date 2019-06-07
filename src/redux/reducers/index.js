@@ -24,9 +24,8 @@ const validationReducer = (state = initialValidationState, action) => {
   switch (action.type) {
     case VALIDATE_ADDRESS:
       const validatedAddress = action.payload
-      state.isFetching = true
-      console.log('action: ', action)
       return { ...state, validatedAddress }
+
     default:
       return state
   }

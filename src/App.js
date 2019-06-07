@@ -5,6 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 import Routes from './routes'
 import store from './redux/store'
+import './App.css'
 
 const theme = createMuiTheme({
   palette: {
@@ -13,6 +14,9 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#f44336'
+    },
+    background: {
+      default: '#F6F8FA'
     }
   }
 })
@@ -20,14 +24,14 @@ const theme = createMuiTheme({
 const App = () => {
   return (
     <>
-      <CssBaseline />
-
       <Provider store={store}>
+
         <MuiThemeProvider theme={theme}>
+          <CssBaseline />
           <Routes />
         </MuiThemeProvider>
-      </Provider>
 
+      </Provider>
     </>
   )
 }

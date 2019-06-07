@@ -7,31 +7,46 @@ export const addFromAddress = address => ({
 
 export const addToAddress = address => ({
   type: ADD_TO_ADDRESS,
-  payload: address,
-  receivedAt: Date.now()
-})
-
-export const validateAddress = address => ({
-  type: VALIDATE_ADDRESS,
   payload: address
 })
 
-export const checkAddress = address => {
+export const validateAddress = json => ({
+  type: VALIDATE_ADDRESS,
+  payload: json
+})
+
+/// /////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////
+
+export const checkAddress = (toAddress, fromAddress) => {
+  console.log({ toAddress, fromAddress })
   return dispatch => {
     const url = 'https://dev-api.shipwell.com/v2/locations/addresses/validate/'
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'Cache-Control': 'no-cache',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ formatted_address: '209 West 9th St. Austin, Texas 78701' })
+    const options = address => {
+      return {
+        method: 'POST',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ formatted_address: address })
+      }
     }
 
-    return fetch(url, options)
+    const requestTo = fetch(url, options(toAddress))
       .then(response => response.json())
-      .then(json => dispatch(validateAddress(json)))
-      .catch(e => console.error(e))
+
+    const requestFrom = fetch(url, options(fromAddress))
+      .then(response => response.json())
+
+    let combinedData = { 'to': {}, 'from': {} }
+
+    Promise.all([requestTo, requestFrom]).then(values => {
+      combinedData['toValidationResponse'] = values[0]
+      combinedData['fromValidationResponse'] = values[1]
+      return dispatch(validateAddress(combinedData))
+    }).catch(e => console.error(e))
   }
 }

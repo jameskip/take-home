@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { addFromAddress, addToAddress, validateAddress, checkAddress } from '../redux/actions'
+import { addFromAddress, addToAddress, checkAddress } from '../redux/actions'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -69,20 +69,22 @@ const Welcome = props => {
           className={classes.textField}
           margin="normal"
         />
+
         <Button
           variant="contained"
           className={classes.button}
-          onClick={e => dispatch(checkAddress(e.target.value))}
+          onClick={e => dispatch(checkAddress(state.addressReducer.toAddress, state.addressReducer.fromAddress))}
         >
           Search
         </Button>
+        
       </Paper>
     </div>
   )
 }
 
-const mapStateToProps = state => {
-  console.log(state)
+const mapStateToProps = (state, ownProps) => {
+  console.log({ state, ownProps })
   return { state }
 }
 
