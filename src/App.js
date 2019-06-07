@@ -17,14 +17,14 @@ const theme = createMuiTheme({
 
 function App () {
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
 
       <MuiThemeProvider theme={theme}>
         <Routes />
       </MuiThemeProvider>
 
-    </React.Fragment>
+    </>
   )
 }
 
