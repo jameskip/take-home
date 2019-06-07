@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, BrowserRouter } from 'react-router-dom'
 
-import VisableWelcome from './components/Welcome'
+import VisableWelcome from './components/AddressSearch'
 
 const HomeRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (

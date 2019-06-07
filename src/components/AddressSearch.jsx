@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
-import Paper from '@material-ui/core/Paper'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
+import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-vars
+import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
+import TextField from '@material-ui/core/TextField' // eslint-disable-line no-unused-vars
 import { makeStyles } from '@material-ui/core/styles'
 
 import { addFromAddress, addToAddress, checkAddress } from '../redux/actions'
@@ -24,19 +24,13 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
     width: 200
   },
-  dense: {
-    marginTop: 19
-  },
-  menu: {
-    width: 200
-  },
   button: {
     margin: theme.spacing(1),
     backgroundColor: '#38a3dc'
   }
 }))
 
-const Welcome = props => {
+const AddressSearch = props => {
   console.log({ props })
   const { dispatch, state } = props
 
@@ -47,7 +41,8 @@ const Welcome = props => {
   // }
 
   return (
-    <div className={classes.container}>
+    <div id="main-contain" className={classes.container}>
+
       <Paper className={classes.root}>
 
         <TextField
@@ -73,11 +68,13 @@ const Welcome = props => {
         <Button
           variant="contained"
           className={classes.button}
-          onClick={e => dispatch(checkAddress(state.addressReducer.toAddress, state.addressReducer.fromAddress))}
+          onClick={e => {
+            return dispatch(checkAddress(state.addressReducer.toAddress, state.addressReducer.fromAddress))
+          }}
         >
           Search
         </Button>
-        
+
       </Paper>
     </div>
   )
@@ -88,4 +85,4 @@ const mapStateToProps = (state, ownProps) => {
   return { state }
 }
 
-export default connect(mapStateToProps)(Welcome)
+export default connect(mapStateToProps)(AddressSearch)

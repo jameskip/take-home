@@ -1,4 +1,5 @@
 import { ADD_FROM_ADDRESS, ADD_TO_ADDRESS, VALIDATE_ADDRESS } from './actionTypes'
+import { ADDRESS_VALIDATION_URL } from '../.env.dev.js'
 
 export const addFromAddress = address => ({
   type: ADD_FROM_ADDRESS,
@@ -22,7 +23,7 @@ export const validateAddress = json => ({
 export const checkAddress = (toAddress, fromAddress) => {
   console.log({ toAddress, fromAddress })
   return dispatch => {
-    const url = 'https://dev-api.shipwell.com/v2/locations/addresses/validate/'
+    const url = ADDRESS_VALIDATION_URL
 
     const options = address => {
       return {
@@ -35,15 +36,14 @@ export const checkAddress = (toAddress, fromAddress) => {
       }
     }
 
-    const requestTo = fetch(url, options(toAddress))
-      .then(response => response.json())
+    const requestValidation = address => (
+      fetch(url, options(address))
+        .then(response => response.json())
+    )
 
-    const requestFrom = fetch(url, options(fromAddress))
-      .then(response => response.json())
+    let combinedData = { 'toValidationResponse': {}, 'fromValidationResponse': {} }
 
-    let combinedData = { 'to': {}, 'from': {} }
-
-    Promise.all([requestTo, requestFrom]).then(values => {
+    Promise.all([requestValidation(toAddress), requestValidation(fromAddress)]).then(values => {
       combinedData['toValidationResponse'] = values[0]
       combinedData['fromValidationResponse'] = values[1]
       return dispatch(validateAddress(combinedData))
