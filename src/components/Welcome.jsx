@@ -1,14 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import { makeStyles } from '@material-ui/core/styles'
 
-import { addFromAddress, addToAddress } from '../redux/actions'
+import { addFromAddress, addToAddress, validateAddress, checkAddress } from '../redux/actions'
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(3, 2),
+    position: 'absolute',
+    top: '50%'
+  },
   container: {
+    height: '100%',
     display: 'flex',
-    flexWrap: 'wrap'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -20,6 +29,10 @@ const useStyles = makeStyles(theme => ({
   },
   menu: {
     width: 200
+  },
+  button: {
+    margin: theme.spacing(1),
+    backgroundColor: '#38a3dc'
   }
 }))
 
@@ -34,33 +47,41 @@ const Welcome = props => {
   // }
 
   return (
-    <>
+    <div className={classes.container}>
+      <Paper className={classes.root}>
 
-      <TextField
-        required
-        id="standard-required"
-        label="To"
-        value={state.toAddress}
-        onChange={e => dispatch(addToAddress(e.target.value))}
-        className={classes.textField}
-        margin="normal"
-      />
+        <TextField
+          required
+          id="standard-required"
+          label="To"
+          value={state.toAddress}
+          onChange={e => dispatch(addToAddress(e.target.value))}
+          className={classes.textField}
+          margin="normal"
+        />
 
-      <TextField
-        required
-        id="standard-required"
-        label="From"
-        value={state.fromAddress}
-        onChange={e => dispatch(addFromAddress(e.target.value))}
-        className={classes.textField}
-        margin="normal"
-      />
-
-    </>
+        <TextField
+          required
+          id="standard-required"
+          label="From"
+          value={state.fromAddress}
+          onChange={e => dispatch(addFromAddress(e.target.value))}
+          className={classes.textField}
+          margin="normal"
+        />
+        <Button
+          variant="contained"
+          className={classes.button}
+          onClick={e => dispatch(checkAddress(e.target.value))}
+        >
+          Search
+        </Button>
+      </Paper>
+    </div>
   )
 }
 
-function mapStateToProps (state) {
+const mapStateToProps = state => {
   console.log(state)
   return { state }
 }

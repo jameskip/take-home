@@ -17,7 +17,7 @@ const theme = createMuiTheme({
   }
 })
 
-function App () {
+const App = () => {
   return (
     <>
       <CssBaseline />
