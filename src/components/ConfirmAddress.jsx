@@ -9,13 +9,18 @@ import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-v
 import Modal from '@material-ui/core/Modal' // eslint-disable-line no-unused-vars
 
 import MapModal from './MapModal' // eslint-disable-line no-unused-vars
-import { getModalStyle } from '../utils.js'
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   paper: {
     position: 'absolute',
-    display: 'flex',
-    width: 675,
+    top: '50%',
+    marginRight: '-50%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(4),
@@ -30,20 +35,18 @@ const useStyles = makeStyles(theme => ({
 const ConfirmAddress = (props) => {
   const classes = useStyles()
 
-  const [modalStyle] = React.useState(getModalStyle)
-
   // const handleClick = () => event => dispatch(checkAddress(state.addressReducer.originAddress, state.addressReducer.destinationAddress))
 
   return (
-    <Paper>
+    <span className={classes.container}>
+      <Paper className={classes.paper}>
 
-      <div style={modalStyle} className={classes.paper}>
         <Button component={Link} to={'/map'} className={classes.button}>
           Map
         </Button>
-      </div>
 
-    </Paper>
+      </Paper>
+    </span>
   )
 }
 

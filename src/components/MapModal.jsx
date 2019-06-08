@@ -8,13 +8,20 @@ import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-v
 import Modal from '@material-ui/core/Modal' // eslint-disable-line no-unused-vars
 
 import { GOOGLE_MAPS_API_KEY } from '../.env.dev.js'
-import { getModalStyle } from '../utils.js'
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   paper: {
     position: 'absolute',
-    display: 'flex',
-    width: 675,
+    top: '50%',
+    left: '50%',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(4),
@@ -45,16 +52,16 @@ const MapModal = props => {
   const { state } = props
   const classes = useStyles()
 
-  const [modalStyle] = React.useState(getModalStyle)
   const url = `&origin=${state.addressReducer.originAddress}&destination=${state.addressReducer.destinationAddress}`
 
   return (
-
-    <Paper>
-      <div style={modalStyle} className={classes.paper}>'
-        {renderModal(url)}
-      </div>
-    </Paper>
+    <div className={classes.container}>
+      <Paper>
+        <div className={classes.paper}>'
+          {renderModal(url)}
+        </div>
+      </Paper>
+    </div>
   )
 }
 
