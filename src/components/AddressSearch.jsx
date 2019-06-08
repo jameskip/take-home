@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-var
 import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
 import TextField from '@material-ui/core/TextField' // eslint-disable-line no-unused-vars
 import { makeStyles } from '@material-ui/core/styles'
-import MapModal from './MapModal'
+import MapModal from './MapModal' // eslint-disable-line no-unused-vars
 
 import { addOrigin, addDestination, checkAddress } from '../redux/actions'
 
@@ -42,14 +42,24 @@ const AddressSearch = (props: Props) => {
 
   const classes = useStyles()
 
-  const handleChange = name => async event => {
-    await dispatch(checkAddress(state.addressReducer.toAddress, state.addressReducer.fromAddress))
+  const handleChange = (name: string) => event => {
+    return dispatch(checkAddress(state.addressReducer.toAddress, state.addressReducer.fromAddress))
   }
 
   return (
     <div id="main-contain" className={classes.container}>
 
       <Paper className={classes.root}>
+
+        <TextField
+          required
+          id="standard-required"
+          label="From"
+          value={state.fromAddress}
+          onChange={e => dispatch(addOrigin(e.target.value))}
+          className={classes.textField}
+          margin="normal"
+        />
 
         <TextField
           required
@@ -61,20 +71,12 @@ const AddressSearch = (props: Props) => {
           margin="normal"
         />
 
-        <TextField
-          required
-          id="standard-required"
-          label="From"
-          value={state.fromAddress}
-          onChange={e => dispatch(addOrigin(e.target.value))}
-          className={classes.textField}
-          margin="normal"
-        />
-        <MapModal
-          location={`&origin=${state.addressReducer.fromAddress}&destination=${state.addressReducer.toAddress}`}
-          className={classes.button}
-          onClick={handleChange('search')}
-        />
+        <span onClick={handleChange('search')}>
+          <MapModal
+            location={`&origin=${state.addressReducer.fromAddress}&destination=${state.addressReducer.toAddress}`}
+            className={classes.button}
+          />
+        </span>
       </Paper>
     </div>
   )

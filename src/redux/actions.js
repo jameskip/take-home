@@ -1,12 +1,12 @@
 import { ADD_FROM_ADDRESS, ADD_TO_ADDRESS, VALIDATE_ADDRESS, GET_DIRECTIONS } from './actionTypes'
 import { GOOGLE_DIRECTIONS_URL, ADDRESS_VALIDATION_URL } from '../.env.dev.js'
 
-export const addDestination = address => ({
+export const addOrigin = address => ({
   type: ADD_FROM_ADDRESS,
   payload: address
 })
 
-export const addOrigin = address => ({
+export const addDestination = address => ({
   type: ADD_TO_ADDRESS,
   payload: address
 })
@@ -20,10 +20,6 @@ export const getDirections = address => ({
   type: GET_DIRECTIONS,
   payload: address
 })
-
-/// /////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////
 
 export const checkAddress = (origin, destination) => {
   console.log({ origin, destination })
@@ -46,11 +42,11 @@ export const checkAddress = (origin, destination) => {
         .then(response => response.json())
     )
 
-    let combinedData = { 'toValidationResponse': {}, 'fromValidationResponse': {} }
+    let combinedData = { 'validOrigin': {}, 'validDestination': {} }
     Promise.all([requestValidation(origin), requestValidation(destination)])
       .then(values => {
-        combinedData['toValidationResponse'] = values[0]
-        combinedData['fromValidationResponse'] = values[1]
+        combinedData['validOrigin'] = values[0]
+        combinedData['validDestination'] = values[1]
         return dispatch(validateAddress(combinedData))
       })
       .catch(e => console.error(e))
