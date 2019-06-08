@@ -1,5 +1,5 @@
-import { ADD_FROM_ADDRESS, ADD_TO_ADDRESS, VALIDATE_ADDRESS, GET_DIRECTIONS } from './actionTypes'
-import { GOOGLE_DIRECTIONS_URL, ADDRESS_VALIDATION_URL } from '../.env.dev.js'
+import { ADD_FROM_ADDRESS, ADD_TO_ADDRESS, VALIDATE_ADDRESS, GET_DIRECTIONS, GET_USER } from './actionTypes'
+import { GOOGLE_DIRECTIONS_URL, ADDRESS_VALIDATION_URL, USER_AUTH_URL, AUTH_TOKEN } from '../.env.dev.js'
 
 export const addOrigin = address => ({
   type: ADD_FROM_ADDRESS,
@@ -19,6 +19,11 @@ export const validateAddress = json => ({
 export const getDirections = address => ({
   type: GET_DIRECTIONS,
   payload: address
+})
+
+export const getUserObj = user => ({
+  type: GET_USER,
+  payload: user
 })
 
 export const checkAddress = (origin, destination) => {
@@ -46,6 +51,28 @@ export const checkAddress = (origin, destination) => {
         combinedData['validDestination'] = values[1]
         return dispatch(validateAddress(combinedData))
       })
+      .catch(e => console.error(e))
+  }
+}
+
+export const getUser = () => {
+  console.log('GETTING USER')
+  return dispatch => {
+    const url = USER_AUTH_URL
+    const token = AUTH_TOKEN
+
+    const options = {
+      method: 'GET',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/json',
+        Authorization: token
+      }
+    }
+
+    fetch(url, options) // eslint-disable-line no-undef
+      .then(response => response.json())
+      .then(user => dispatch(getUserObj(user)))
       .catch(e => console.error(e))
   }
 }

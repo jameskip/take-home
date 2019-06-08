@@ -6,5 +6,8 @@
     ],
     "plugins": [
       "flowtype"
-    ]
+    ],
+    "rules": {
+      "no-mixed-operators": "off"
+    }
 }

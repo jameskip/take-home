@@ -1,25 +1,15 @@
 // @flow
 import React from 'react'
-
-import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
-import Modal from '@material-ui/core/Modal' // eslint-disable-line no-unused-vars
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const rand = () => {
-  return Math.round(Math.random() * 20) - 10
-}
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-vars
+import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
+import Modal from '@material-ui/core/Modal' // eslint-disable-line no-unused-vars
 
-const getModalStyle = () => {
-  const top = 50 + rand()
-  const left = 50 + rand()
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  }
-}
+import MapModal from './MapModal' // eslint-disable-line no-unused-vars
+import { getModalStyle } from '../utils.js'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -32,38 +22,31 @@ const useStyles = makeStyles(theme => ({
     outline: 'none'
   },
   button: {
+    margin: theme.spacing(1),
     backgroundColor: theme.palette.primary.main
   }
 }))
 
-const MapsModal = (props) => {
+const ConfirmAddress = (props) => {
   const classes = useStyles()
 
-  const [open, setOpen] = React.useState(false)
   const [modalStyle] = React.useState(getModalStyle)
 
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  // const handleClick = () => event => dispatch(checkAddress(state.addressReducer.originAddress, state.addressReducer.destinationAddress))
 
   return (
+    <Paper>
 
-    <>
-      <Button className={classes.button} onClick={handleOpen}>Map</Button>
+      <div style={modalStyle} className={classes.paper}>
+        <Button component={Link} to={'/map'} className={classes.button}>
+          Map
+        </Button>
+      </div>
 
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={open}
-        onClose={handleClose}
-      >
-
-      Hey
-
-      </Modal>
-    </>
+    </Paper>
   )
 }
 
 const mapStateToProps = (state, ownProps) => ({ state })
 
-export default connect(mapStateToProps)(MapsModal)
+export default connect(mapStateToProps)(ConfirmAddress)

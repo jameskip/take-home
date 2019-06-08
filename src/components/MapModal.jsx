@@ -1,26 +1,14 @@
 // @flow
 import React from 'react'
+import { connect } from 'react-redux'
 
 import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-vars
 import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
 import Modal from '@material-ui/core/Modal' // eslint-disable-line no-unused-vars
-import { connect } from 'react-redux'
+
 import { GOOGLE_MAPS_API_KEY } from '../.env.dev.js'
-
-const rand = () => {
-  return Math.round(Math.random() * 20) - 10
-}
-
-const getModalStyle = () => {
-  const top = 50 + rand()
-  const left = 50 + rand()
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  }
-}
+import { getModalStyle } from '../utils.js'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -39,7 +27,6 @@ const useStyles = makeStyles(theme => ({
 
 const renderModal = (location: string) => {
   const url = `https://www.google.com/maps/embed/v1/directions?key=${GOOGLE_MAPS_API_KEY}${location}&avoid=tolls`
-  console.log({ location })
   return (
     <iframe
       width="600"
@@ -54,36 +41,23 @@ const renderModal = (location: string) => {
   )
 }
 
-const MapsModal = (props) => {
+const MapModal = props => {
+  const { state } = props
   const classes = useStyles()
 
-  const [open, setOpen] = React.useState(false)
   const [modalStyle] = React.useState(getModalStyle)
-
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const url = `&origin=${state.addressReducer.originAddress}&destination=${state.addressReducer.destinationAddress}`
 
   return (
 
-    <>
-      <Button className={classes.button} onClick={handleOpen}>Map</Button>
-
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={open}
-        onClose={handleClose}
-      >
-
-        <div style={modalStyle} className={classes.paper}>'
-          {renderModal(props.location)}
-        </div>
-
-      </Modal>
-    </>
+    <Paper>
+      <div style={modalStyle} className={classes.paper}>'
+        {renderModal(url)}
+      </div>
+    </Paper>
   )
 }
 
 const mapStateToProps = (state, ownProps) => ({ state })
 
-export default connect(mapStateToProps)(MapsModal)
+export default connect(mapStateToProps)(MapModal)
