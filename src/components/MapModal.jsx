@@ -1,9 +1,10 @@
 import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
-import Modal from '@material-ui/core/Modal'
-import Button from '@material-ui/core/Button'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
+import Modal from '@material-ui/core/Modal' // eslint-disable-line no-unused-vars
+import { connect } from 'react-redux'
+import { GOOGLE_MAPS_API_KEY } from '../.env.dev'
 
 const rand = () => {
   return Math.round(Math.random() * 20) - 10
@@ -23,39 +24,48 @@ const getModalStyle = () => {
 const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
+    display: 'flex',
     width: 675,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(4),
     outline: 'none'
+  },
+  button: {
+    backgroundColor: theme.palette.primary.main
   }
 }))
 
-const MapsModal = (props) => {
-  const [open, setOpen] = React.useState(false)
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle)
-  const [loaded, setLoaded] = React.useState(false)
+const renderModal = (location) => {
+  const url = `https://www.google.com/maps/embed/v1/directions?key=${GOOGLE_MAPS_API_KEY}${location}&avoid=tolls`
+  console.log({ location })
+  return (
+    <iframe
+      width="600"
+      height="450"
+      frameBorder="0"
+      title="Directions"
+      style={{ 'border': '0' }}
+      src={url}
+      allowFullScreen
+    >
+    </iframe>
+  )
+}
 
-  const handleRender = () => setLoaded(true)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => {
-    setOpen(false)
-    setLoaded(false)
-  }
+const MapsModal = (props) => {
   const classes = useStyles()
 
-  const renderModal = (location) => {
-    return (
-      <iframe width="600" height="450" frameBorder="0" onLoad={handleRender} style={{ 'border': '0' }} src={`https://www.google.com/maps/embed/v1/place?q=${location}&key=AIzaSyDAh9dEXF_kYIqYav1ZFboMtXfRvlQtONo`} allowFullScreen>
-      </iframe>
-    )
-  }
+  const [open, setOpen] = React.useState(false)
+  const [modalStyle] = React.useState(getModalStyle)
+
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   return (
 
-    <div>
-      <Button onClick={handleOpen}>Map</Button>
+    <>
+      <Button className={classes.button} onClick={handleOpen}>Map</Button>
 
       <Modal
         aria-labelledby="simple-modal-title"
@@ -69,8 +79,10 @@ const MapsModal = (props) => {
         </div>
 
       </Modal>
-    </div>
+    </>
   )
 }
 
-export default MapsModal
+const mapStateToProps = (state, ownProps) => ({ state })
+
+export default connect(mapStateToProps)(MapsModal)

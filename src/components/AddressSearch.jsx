@@ -1,11 +1,13 @@
+// @flow
 import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-vars
 import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
 import TextField from '@material-ui/core/TextField' // eslint-disable-line no-unused-vars
 import { makeStyles } from '@material-ui/core/styles'
+import MapModal from './MapModal'
 
-import { addFromAddress, addToAddress, checkAddress } from '../redux/actions'
+import { addOrigin, addDestination, checkAddress } from '../redux/actions'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,15 +32,19 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const AddressSearch = props => {
-  console.log({ props })
+type Props = {
+  dispatch: (string) => void,
+  state: {fromAddress: string, toAddress: string, addressReducer: () => void }
+}
+
+const AddressSearch = (props: Props) => {
   const { dispatch, state } = props
 
   const classes = useStyles()
 
-  // const handleChange = name => event => {
-
-  // }
+  const handleChange = name => async event => {
+    await dispatch(checkAddress(state.addressReducer.toAddress, state.addressReducer.fromAddress))
+  }
 
   return (
     <div id="main-contain" className={classes.container}>
@@ -50,7 +56,7 @@ const AddressSearch = props => {
           id="standard-required"
           label="To"
           value={state.toAddress}
-          onChange={e => dispatch(addToAddress(e.target.value))}
+          onChange={e => dispatch(addDestination(e.target.value))}
           className={classes.textField}
           margin="normal"
         />
@@ -60,29 +66,20 @@ const AddressSearch = props => {
           id="standard-required"
           label="From"
           value={state.fromAddress}
-          onChange={e => dispatch(addFromAddress(e.target.value))}
+          onChange={e => dispatch(addOrigin(e.target.value))}
           className={classes.textField}
           margin="normal"
         />
-
-        <Button
-          variant="contained"
+        <MapModal
+          location={`&origin=${state.addressReducer.fromAddress}&destination=${state.addressReducer.toAddress}`}
           className={classes.button}
-          onClick={e => {
-            return dispatch(checkAddress(state.addressReducer.toAddress, state.addressReducer.fromAddress))
-          }}
-        >
-          Search
-        </Button>
-
+          onClick={handleChange('search')}
+        />
       </Paper>
     </div>
   )
 }
 
-const mapStateToProps = (state, ownProps) => {
-  console.log({ state, ownProps })
-  return { state }
-}
+const mapStateToProps = (state, ownProps) => ({ state })
 
 export default connect(mapStateToProps)(AddressSearch)

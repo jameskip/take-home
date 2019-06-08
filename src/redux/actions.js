@@ -1,12 +1,12 @@
-import { ADD_FROM_ADDRESS, ADD_TO_ADDRESS, VALIDATE_ADDRESS } from './actionTypes'
-import { ADDRESS_VALIDATION_URL } from '../.env.dev.js'
+import { ADD_FROM_ADDRESS, ADD_TO_ADDRESS, VALIDATE_ADDRESS, GET_DIRECTIONS } from './actionTypes'
+import { GOOGLE_DIRECTIONS_URL, ADDRESS_VALIDATION_URL } from '../.env.dev.js'
 
-export const addFromAddress = address => ({
+export const addDestination = address => ({
   type: ADD_FROM_ADDRESS,
   payload: address
 })
 
-export const addToAddress = address => ({
+export const addOrigin = address => ({
   type: ADD_TO_ADDRESS,
   payload: address
 })
@@ -16,12 +16,17 @@ export const validateAddress = json => ({
   payload: json
 })
 
+export const getDirections = address => ({
+  type: GET_DIRECTIONS,
+  payload: address
+})
+
 /// /////////////////////////////////////////////////////////////
 /// /////////////////////////////////////////////////////////////
 /// /////////////////////////////////////////////////////////////
 
-export const checkAddress = (toAddress, fromAddress) => {
-  console.log({ toAddress, fromAddress })
+export const checkAddress = (origin, destination) => {
+  console.log({ origin, destination })
   return dispatch => {
     const url = ADDRESS_VALIDATION_URL
 
@@ -37,16 +42,28 @@ export const checkAddress = (toAddress, fromAddress) => {
     }
 
     const requestValidation = address => (
-      fetch(url, options(address))
+      fetch(url, options(address)) // eslint-disable-line no-undef
         .then(response => response.json())
     )
 
     let combinedData = { 'toValidationResponse': {}, 'fromValidationResponse': {} }
+    Promise.all([requestValidation(origin), requestValidation(destination)])
+      .then(values => {
+        combinedData['toValidationResponse'] = values[0]
+        combinedData['fromValidationResponse'] = values[1]
+        return dispatch(validateAddress(combinedData))
+      })
+      .catch(e => console.error(e))
+  }
+}
 
-    Promise.all([requestValidation(toAddress), requestValidation(fromAddress)]).then(values => {
-      combinedData['toValidationResponse'] = values[0]
-      combinedData['fromValidationResponse'] = values[1]
-      return dispatch(validateAddress(combinedData))
-    }).catch(e => console.error(e))
+export const mapDirections = (origin, destination) => {
+  return dispatch => {
+    const url = GOOGLE_DIRECTIONS_URL
+
+    fetch(url) // eslint-disable-line no-undef
+      .then(response => response.json())
+      .then(values => dispatch(getDirections(values)))
+      .catch(e => console.error(e))
   }
 }
