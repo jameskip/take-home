@@ -33,8 +33,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 type Props = {
-  dispatch: (string) => void,
-  state: {fromAddress: string, toAddress: string, addressReducer: () => void }
+  dispatch: (any) => void,
+  state: { originAddress: string, destinationAddress: string, addressReducer: () => void }
 }
 
 const AddressSearch = (props: Props) => {
@@ -42,9 +42,9 @@ const AddressSearch = (props: Props) => {
 
   const classes = useStyles()
 
-  const handleChange = (name: string) => event => {
-    return dispatch(checkAddress(state.addressReducer.toAddress, state.addressReducer.fromAddress))
-  }
+  const handleChange = (name: string) => event => name === 'origin' ? dispatch(addOrigin(event.target.value)) : dispatch(addDestination(event.target.value))
+
+  const handleClick = (name: string) => event => dispatch(checkAddress(state.addressReducer.originAddress, state.addressReducer.destinationAddress))
 
   return (
     <div id="main-contain" className={classes.container}>
@@ -55,8 +55,8 @@ const AddressSearch = (props: Props) => {
           required
           id="standard-required"
           label="From"
-          value={state.fromAddress}
-          onChange={e => dispatch(addOrigin(e.target.value))}
+          value={state.originAddress}
+          onChange={handleChange('origin')}
           className={classes.textField}
           margin="normal"
         />
@@ -65,15 +65,15 @@ const AddressSearch = (props: Props) => {
           required
           id="standard-required"
           label="To"
-          value={state.toAddress}
-          onChange={e => dispatch(addDestination(e.target.value))}
+          value={state.destinationAddress}
+          onChange={handleChange('destination')}
           className={classes.textField}
           margin="normal"
         />
 
-        <span onClick={handleChange('search')}>
+        <span onClick={handleClick('search')}>
           <MapModal
-            location={`&origin=${state.addressReducer.fromAddress}&destination=${state.addressReducer.toAddress}`}
+            location={`&origin=${state.addressReducer.originAddress}&destination=${state.addressReducer.destinationAddress}`}
             className={classes.button}
           />
         </span>

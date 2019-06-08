@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
 import Modal from '@material-ui/core/Modal' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
-import { GOOGLE_MAPS_API_KEY } from '../.env.dev.js'
 
 const rand = () => {
   return Math.round(Math.random() * 20) - 10
@@ -37,23 +36,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const renderModal = (location: string) => {
-  const url = `https://www.google.com/maps/embed/v1/directions?key=${GOOGLE_MAPS_API_KEY}${location}&avoid=tolls`
-  console.log({ location })
-  return (
-    <iframe
-      width="600"
-      height="450"
-      frameBorder="0"
-      title="Directions"
-      style={{ 'border': '0' }}
-      src={url}
-      allowFullScreen
-    >
-    </iframe>
-  )
-}
-
 const MapsModal = (props) => {
   const classes = useStyles()
 
@@ -75,9 +57,7 @@ const MapsModal = (props) => {
         onClose={handleClose}
       >
 
-        <div style={modalStyle} className={classes.paper}>'
-          {renderModal(props.location)}
-        </div>
+      Hey
 
       </Modal>
     </>

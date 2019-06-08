@@ -37,10 +37,7 @@ export const checkAddress = (origin, destination) => {
       }
     }
 
-    const requestValidation = address => (
-      fetch(url, options(address)) // eslint-disable-line no-undef
-        .then(response => response.json())
-    )
+    const requestValidation = address => fetch(url, options(address)).then(response => response.json()) // eslint-disable-line no-undef
 
     let combinedData = { 'validOrigin': {}, 'validDestination': {} }
     Promise.all([requestValidation(origin), requestValidation(destination)])
