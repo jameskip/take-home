@@ -47,10 +47,11 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ###### Guidelines
 
-- [x]  Build a single page appUse react and redux
-- [x]  Use Shipwell API to validate address input
-- [x]  Use Google Maps for drawing markers and routes on the map
-- [x]  Create a repository on GitHub and share the link with us. (if the repo is private share with 'nfortenberry')
+- [x] Build a single page app
+- [x] Use react and redux
+- [x] Use Shipwell API to validate address input
+- [x] Use Google Maps for drawing markers and routes on the map
+- [x] Create a repository on GitHub and share the link with us. (if the repo is private share with 'nfortenberry')
 
 ###### Bonus
 
