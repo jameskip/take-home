@@ -45,7 +45,7 @@ const MapModal = props => {
   const handleRender = () => setLoaded(true)
 
   const { validOrigin, validDestination } = props.state.validationReducer.validatedAddress
-  const url = `&origin=${validOrigin && validOrigin.geocoded_address.formatted_address}&destination=${validDestination && validDestination.geocoded_address.formatted_address}`
+  const url = `&origin=${validOrigin.geocoded_address && validOrigin.geocoded_address.formatted_address}&destination=${validDestination.geocoded_address && validDestination.geocoded_address.formatted_address}`
 
   const renderModal = (location: string) => {
     const urlString = `https://www.google.com/maps/embed/v1/directions?key=${GOOGLE_MAPS_API_KEY}${location}&avoid=tolls`

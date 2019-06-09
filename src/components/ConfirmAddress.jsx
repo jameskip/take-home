@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-var
 import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
 import Modal from '@material-ui/core/Modal' // eslint-disable-line no-unused-vars
 
-import LinearQuery from './LinearQuery'
+import LinearQuery from './LinearQuery' // eslint-disable-line no-unused-vars
 import MapModal from './MapModal' // eslint-disable-line no-unused-vars
 
 const useStyles = makeStyles(theme => ({

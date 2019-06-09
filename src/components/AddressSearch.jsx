@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200
+    width: 400
   },
   button: {
     margin: theme.spacing(1),
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 // Type Checking
 type Props = {
   dispatch: (any) => void,
-  state: { originAddress: string, destinationAddress: string, addressReducer: () => void }
+  state: { originAddress: string, destinationAddress: string, addressReducer: () => void, userReducer: () => void }
 }
 
 const AddressSearch = (props: Props) => {
