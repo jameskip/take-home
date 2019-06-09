@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-var
 import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
 import Modal from '@material-ui/core/Modal' // eslint-disable-line no-unused-vars
 
+import LinearQuery from './LinearQuery'
 import MapModal from './MapModal' // eslint-disable-line no-unused-vars
 
 const useStyles = makeStyles(theme => ({
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
     width: '50%',
-    top: '50%',
+    top: '25%',
     marginRight: '-50%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
@@ -44,6 +45,10 @@ const useStyles = makeStyles(theme => ({
     float: 'right',
     margin: theme.spacing(1),
     backgroundColor: theme.palette.primary.main
+  },
+  progress: {
+    position: 'relative',
+    top: 0
   }
 }))
 
@@ -57,6 +62,8 @@ const ConfirmAddress = (props) => {
 
   return (
     <div className={classes.container}>
+
+      {!validOrigin && <LinearQuery className={classes.progress} />}
       <Paper className={classes.paper}>
         <Typography className={classes.header} variant="h5" gutterBottom>
           Confirm Address
@@ -84,12 +91,14 @@ const ConfirmAddress = (props) => {
           </Paper>
         </span>
 
-        <Button component={Link} to={'/map'} className={classes.button}>
+        <div>
+          <Button component={Link} to={'/map'} className={classes.button}>
           Map
-        </Button>
-        <Button onClick={props.history.goBack} className={classes.button}>
+          </Button>
+          <Button onClick={props.history.goBack} className={classes.button}>
           Back
-        </Button>
+          </Button>
+        </div>
 
       </Paper>
     </div>

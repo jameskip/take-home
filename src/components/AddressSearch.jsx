@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
     position: 'absolute',
-    top: '50%'
+    top: '25%'
   },
   container: {
     height: '100%',
