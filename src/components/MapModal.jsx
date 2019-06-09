@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -34,25 +34,14 @@ const useStyles = makeStyles(theme => ({
 
 const renderModal = (location: string) => {
   const url = `https://www.google.com/maps/embed/v1/directions?key=${GOOGLE_MAPS_API_KEY}${location}&avoid=tolls`
-  return (
-    <iframe
-      width="600"
-      height="450"
-      frameBorder="0"
-      title="Directions"
-      style={{ 'border': '0' }}
-      src={url}
-      allowFullScreen
-    >
-    </iframe>
-  )
+  return <iframe width="600" height="450" frameBorder="0" title="Directions" style={{ 'border': '0' }} src={url} allowFullScreen />
 }
 
 const MapModal = props => {
-  const { state } = props
   const classes = useStyles()
 
-  const url = `&origin=${state.addressReducer.originAddress}&destination=${state.addressReducer.destinationAddress}`
+  const { validOrigin, validDestination } = props.state.validationReducer.validatedAddress
+  const url = `&origin=${validOrigin.geocoded_address.formatted_address}&destination=${validDestination.geocoded_address.formatted_address}`
 
   return (
     <div className={classes.container}>

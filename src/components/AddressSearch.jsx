@@ -45,6 +45,8 @@ type Props = {
 
 const AddressSearch = (props: Props) => {
   const { dispatch, state } = props
+  const { user } = props.state.userReducer.user
+
   const classes = useStyles()
 
   // Event Handlers
@@ -52,7 +54,7 @@ const AddressSearch = (props: Props) => {
   const handleClick = event => dispatch(checkAddress(state.addressReducer.originAddress, state.addressReducer.destinationAddress))
 
   // Lifecycle Hooks
-  useEffect(() => dispatch(getUser()), [dispatch]) // optional second argument provided to useEffect() in order to only run on mount and unmount
+  useEffect(() => { if (!user) dispatch(getUser()) }, [user, dispatch]) // optional second argument provided to useEffect() in order to only run on mount and unmount
 
   return (
     <div id="main-contain" className={classes.container}>

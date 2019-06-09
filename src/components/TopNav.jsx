@@ -17,7 +17,10 @@ import Menu from '@material-ui/core/Menu' // eslint-disable-line no-unused-vars
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    top: 0,
+    flexGrow: 1,
+    width: '100%',
+    position: 'fixed'
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -29,7 +32,6 @@ const useStyles = makeStyles(theme => ({
 
 const TopNav = props => {
   const classes = useStyles()
-  const [auth, setAuth] = React.useState(true)
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
 
@@ -37,14 +39,13 @@ const TopNav = props => {
   // const { company } = props.state.userReducer.user
   // const { state } = props
 
-  const handleChange = event => setAuth(event.target.checked)
   const handleMenu = event => setAnchorEl(event.currentTarget)
   const handleClose = () => setAnchorEl(null)
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
-      
+
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
@@ -57,14 +58,7 @@ const TopNav = props => {
             <Typography variant="h6" className={classes.title}></Typography> // This is used to hold a spot for the users name
           )}
 
-          <FormGroup>
-            <FormControlLabel
-              control={<Switch checked={auth} onChange={handleChange} aria-label="LoginSwitch" />}
-              label={auth ? 'Logout' : 'Login'}
-            />
-          </FormGroup>
-
-          {auth && (
+          {user && (
             <div>
               <IconButton
                 aria-label="Account of current user"
