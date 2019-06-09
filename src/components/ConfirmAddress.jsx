@@ -56,10 +56,6 @@ const ConfirmAddress = (props) => {
   const { validOrigin, validDestination } = props.state.validationReducer.validatedAddress
   const classes = useStyles()
 
-  useEffect(() => {
-    if (validOrigin) console.log([validOrigin, validDestination])
-  })
-
   return (
     <div className={classes.container}>
 
@@ -73,7 +69,7 @@ const ConfirmAddress = (props) => {
           <Paper className={classes.card}>
             {validOrigin && ( // eslint-disable-line no-mixed-operators
               <Typography variant="body1" className={classes.title}>
-                {validOrigin.geocoded_address.formatted_address}
+                {validOrigin.geocoded_address && validOrigin.geocoded_address.formatted_address}
               </Typography>
             ) || ( // eslint-disable-line no-mixed-operators
               <Typography color="textSecondary" variant="overline" className={classes.title}>Orgin</Typography>
@@ -83,7 +79,7 @@ const ConfirmAddress = (props) => {
           <Paper className={classes.card}>
             {validDestination && ( // eslint-disable-line no-mixed-operators
               <Typography variant="body1" className={classes.title}>
-                {validDestination.geocoded_address.formatted_address}
+                {validDestination.geocoded_address && validDestination.geocoded_address.formatted_address}
               </Typography>
             ) || ( // eslint-disable-line no-mixed-operators
               <Typography color="textSecondary" variant="overline" className={classes.title}>Destination</Typography>
