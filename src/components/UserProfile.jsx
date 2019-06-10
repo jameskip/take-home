@@ -1,18 +1,19 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
+
+import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   container: {
     height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
     top: '25%',
-    position: 'absolute'
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   root: {
     padding: theme.spacing(3, 2)
@@ -25,12 +26,7 @@ const UserProfile = (props) => {
   const { company } = props.state.userReducer.user
 
   return (
-    <Grid
-      container
-      direction="column"
-      justify="center"
-      alignItems="center"
-    >
+    <Grid container direction="column" justify="center" alignItems="center" >
       {user && (
         <div className={classes.container}>
 
@@ -45,11 +41,8 @@ const UserProfile = (props) => {
           </div>
 
           <Paper className={classes.root}>
-            <Typography variant="h5">
-              {user.first_name} {user.last_name}
-            </Typography>
+            <Typography variant="h5">{user.first_name} {user.last_name}</Typography>
             <Typography variant="caption">{company.name}</Typography>
-
             <br /><br />
             <Typography variant="body1">
               {user.email} <br />

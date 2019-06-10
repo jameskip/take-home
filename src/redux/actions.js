@@ -27,7 +27,6 @@ export const getUserObj = user => ({
 })
 
 export const checkAddress = (origin, destination) => {
-  console.log({ origin, destination })
   return dispatch => {
     const url = ADDRESS_VALIDATION_URL
 

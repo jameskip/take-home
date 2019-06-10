@@ -2,11 +2,11 @@
 import React, { useEffect } from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 
-import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-vars
+import { makeStyles } from '@material-ui/core/styles'
 
-import { GOOGLE_MAPS_API_KEY } from '../.env.dev.js'
 import LinearQuery from './LinearQuery'
+import { GOOGLE_MAPS_API_KEY } from '../.env.dev.js'
 
 const useStyles = makeStyles(theme => ({
   container: {

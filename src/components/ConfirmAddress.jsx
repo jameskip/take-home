@@ -3,11 +3,11 @@ import React, { useEffect } from 'react' // eslint-disable-line no-unused-vars
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography' // eslint-disable-line no-unused-vars
+import Grid from '@material-ui/core/Grid' // eslint-disable-line no-unused-vars
 import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-vars
 import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
-import Grid from '@material-ui/core/Grid' // eslint-disable-line no-unused-vars
+import Typography from '@material-ui/core/Typography' // eslint-disable-line no-unused-vars
+import { makeStyles } from '@material-ui/core/styles'
 
 import LinearQuery from './LinearQuery' // eslint-disable-line no-unused-vars
 
@@ -53,8 +53,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const ConfirmAddress = (props) => {
-  const { validOrigin, validDestination } = props.state.validationReducer.validatedAddress
   const classes = useStyles()
+  const { validOrigin, validDestination } = props.state.validationReducer.validatedAddress
   const [disabled, setDisabled] = React.useState(true)
 
   const disableButton = () => !(validOrigin || validDestination) ? setDisabled(true) : setDisabled(false)
@@ -64,12 +64,12 @@ const ConfirmAddress = (props) => {
     <>
       {!validOrigin && <LinearQuery className={classes.progress} />}
       <Grid container spacing={2}>
+
         <Grid item xs={12}>
           <div className={classes.container}>
             <Paper className={classes.paper}>
-              <Typography className={classes.header} variant="h5" gutterBottom>
-                Confirm Address
-              </Typography>
+
+              <Typography className={classes.header} variant="h5" gutterBottom>Confirm Address</Typography>
 
               <Paper className={classes.card}>
                 {validOrigin && ( // eslint-disable-line no-mixed-operators
@@ -96,6 +96,7 @@ const ConfirmAddress = (props) => {
             </Paper>
           </div>
         </Grid>
+
       </Grid>
     </>
   )

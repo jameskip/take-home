@@ -3,16 +3,16 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar' // eslint-disable-line no-unused-vars
-import Toolbar from '@material-ui/core/Toolbar' // eslint-disable-line no-unused-vars
-import Typography from '@material-ui/core/Typography' // eslint-disable-line no-unused-vars
-import IconButton from '@material-ui/core/IconButton' // eslint-disable-line no-unused-vars
+import Link from '@material-ui/core/Link'
+import Menu from '@material-ui/core/Menu' // eslint-disable-line no-unused-vars
 import Home from '@material-ui/icons/Home' // eslint-disable-line no-unused-vars
 import Avatar from '@material-ui/core/Avatar' // eslint-disable-line no-unused-vars
+import AppBar from '@material-ui/core/AppBar' // eslint-disable-line no-unused-vars
+import Toolbar from '@material-ui/core/Toolbar' // eslint-disable-line no-unused-vars
 import MenuItem from '@material-ui/core/MenuItem' // eslint-disable-line no-unused-vars
-import Menu from '@material-ui/core/Menu' // eslint-disable-line no-unused-vars
-import Link from '@material-ui/core/Link'
+import IconButton from '@material-ui/core/IconButton' // eslint-disable-line no-unused-vars
+import Typography from '@material-ui/core/Typography' // eslint-disable-line no-unused-vars
+import { makeStyles } from '@material-ui/core/styles'
 
 import { getUser } from '../redux/actions'
 
@@ -57,9 +57,7 @@ const TopNav = props => {
           <IconButton component={RouterLink} to={'/'} color="secondary" edge="start" className={classes.menuButton} aria-label="Menu"><Home /></IconButton>
 
           {user && ( // eslint-disable-line
-            <Typography variant="overline" className={classes.title}>
-              {company.name}
-            </Typography>
+            <Typography variant="overline" className={classes.title}>{company.name}</Typography>
           ) || ( // eslint-disable-line
             <Typography variant="overline" className={classes.title}></Typography> // This is used to hold a spot for the users name
           )}
@@ -79,15 +77,9 @@ const TopNav = props => {
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                 open={open}
                 onClose={handleClose}
               >

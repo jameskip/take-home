@@ -3,13 +3,13 @@ import React, { useEffect } from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-vars
 import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
-import TextField from '@material-ui/core/TextField' // eslint-disable-line no-unused-vars
-import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container' // eslint-disable-line no-unused-vars
-import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField' // eslint-disable-line no-unused-vars
 import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
 
 import ConfirmAddress from './ConfirmAddress' // eslint-disable-line no-unused-vars
 import { addOrigin, addDestination, checkAddress } from '../redux/actions'
@@ -52,14 +52,15 @@ const AddressSearch = (props: Props) => {
   const [disabled, setDisabled] = React.useState(true)
 
   const handleClick = event => dispatch(checkAddress(state.addressReducer.originAddress, state.addressReducer.destinationAddress))
+  const disableButton = () => state.addressReducer.originAddress.length < 1 || state.addressReducer.destinationAddress < 1 ? setDisabled(true) : setDisabled(false)
   const handleChange = (name: string) => event => {
     name === 'origin' ? dispatch(addOrigin(event.target.value)) : dispatch(addDestination(event.target.value))
     disableButton()
   }
-  const disableButton = () => state.addressReducer.originAddress.length < 1 || state.addressReducer.destinationAddress < 1 ? setDisabled(true) : setDisabled(false)
 
   return (
     <Grid container spacing={2}>
+
       <div className={classes.container}>
         <Paper className={classes.root}>
           <Typography variant="h5"> Get Route
@@ -94,6 +95,7 @@ const AddressSearch = (props: Props) => {
           </Grid>
         </Paper>
       </div>
+
     </Grid>
   )
 }
