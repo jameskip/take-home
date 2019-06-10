@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 
 import Link from '@material-ui/core/Link'
-import Menu from '@material-ui/core/Menu' // eslint-disable-line no-unused-vars
-import Home from '@material-ui/icons/Home' // eslint-disable-line no-unused-vars
-import Avatar from '@material-ui/core/Avatar' // eslint-disable-line no-unused-vars
-import AppBar from '@material-ui/core/AppBar' // eslint-disable-line no-unused-vars
-import Toolbar from '@material-ui/core/Toolbar' // eslint-disable-line no-unused-vars
-import MenuItem from '@material-ui/core/MenuItem' // eslint-disable-line no-unused-vars
-import IconButton from '@material-ui/core/IconButton' // eslint-disable-line no-unused-vars
-import Typography from '@material-ui/core/Typography' // eslint-disable-line no-unused-vars
+import Menu from '@material-ui/core/Menu'
+import Home from '@material-ui/icons/Home'
+import Avatar from '@material-ui/core/Avatar'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import MenuItem from '@material-ui/core/MenuItem'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { getUser } from '../redux/actions'

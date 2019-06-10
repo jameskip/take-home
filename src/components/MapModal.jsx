@@ -1,8 +1,8 @@
 // @flow
-import React, { useEffect } from 'react' // eslint-disable-line no-unused-vars
+import React from 'react'
 import { connect } from 'react-redux'
 
-import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-vars
+import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 
 import LinearQuery from './LinearQuery'

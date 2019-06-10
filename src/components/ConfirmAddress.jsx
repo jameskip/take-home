@@ -1,15 +1,15 @@
 // @flow
-import React, { useEffect } from 'react' // eslint-disable-line no-unused-vars
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import Grid from '@material-ui/core/Grid' // eslint-disable-line no-unused-vars
-import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-vars
-import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
-import Typography from '@material-ui/core/Typography' // eslint-disable-line no-unused-vars
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 
-import LinearQuery from './LinearQuery' // eslint-disable-line no-unused-vars
+import LinearQuery from './LinearQuery'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -73,21 +73,21 @@ const ConfirmAddress = (props) => {
               <Typography className={classes.header} variant="h5" gutterBottom>Confirm Address</Typography>
 
               <Paper className={classes.card}>
-                {validOrigin && ( // eslint-disable-line no-mixed-operators
+                {validOrigin && (
                   <Typography variant="body1" className={classes.title}>
                     {validOrigin.geocoded_address && validOrigin.geocoded_address.formatted_address}
                   </Typography>
-                ) || ( // eslint-disable-line no-mixed-operators
+                ) || (
                   <Typography color="textSecondary" variant="overline" className={classes.title}>Orgin</Typography>
                 )}
               </Paper>
 
               <Paper className={classes.card}>
-                {validDestination && ( // eslint-disable-line no-mixed-operators
+                {validDestination && (
                   <Typography variant="body1" className={classes.title}>
                     {validDestination.geocoded_address && validDestination.geocoded_address.formatted_address}
                   </Typography>
-                ) || ( // eslint-disable-line no-mixed-operators
+                ) || (
                   <Typography color="textSecondary" variant="overline" className={classes.title}>Destination</Typography>
                 )}
               </Paper>

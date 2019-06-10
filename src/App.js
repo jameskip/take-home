@@ -1,10 +1,10 @@
-import React from 'react' // eslint-disable-line no-unused-vars
-import { Provider } from 'react-redux' // eslint-disable-line no-unused-vars
+import React from 'react' 
+import { Provider } from 'react-redux' 
 
-import CssBaseline from '@material-ui/core/CssBaseline' // eslint-disable-line no-unused-vars
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles' // eslint-disable-line no-unused-vars
+import CssBaseline from '@material-ui/core/CssBaseline' 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles' 
 
-import Routes from './routes' // eslint-disable-line no-unused-vars
+import Routes from './routes' 
 import store from './redux/store'
 import './App.css'
 

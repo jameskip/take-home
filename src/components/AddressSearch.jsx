@@ -1,17 +1,15 @@
 // @flow
-import React, { useEffect } from 'react' // eslint-disable-line no-unused-vars
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-vars
-import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
-import Container from '@material-ui/core/Container' // eslint-disable-line no-unused-vars
-import TextField from '@material-ui/core/TextField' // eslint-disable-line no-unused-vars
+import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 
-import ConfirmAddress from './ConfirmAddress' // eslint-disable-line no-unused-vars
 import { addOrigin, addDestination, checkAddress } from '../redux/actions'
 
 const useStyles = makeStyles(theme => ({
@@ -63,8 +61,9 @@ const AddressSearch = (props: Props) => {
 
       <div className={classes.container}>
         <Paper className={classes.root}>
-          <Typography variant="h5"> Get Route
-          </Typography>
+
+          <Typography variant="h5">Get Route</Typography>
+
           <TextField
             required
             id="standard-required"
