@@ -73,22 +73,24 @@ const ConfirmAddress = (props) => {
               <Typography className={classes.header} variant="h5" gutterBottom>Confirm Address</Typography>
 
               <Paper className={classes.card}>
+                <Typography variant="overline">
+                  Origin
+                </Typography>
                 {validOrigin && (
                   <Typography variant="body1" className={classes.title}>
                     {validOrigin.geocoded_address && validOrigin.geocoded_address.formatted_address}
                   </Typography>
-                ) || (
-                  <Typography color="textSecondary" variant="overline" className={classes.title}>Orgin</Typography>
                 )}
               </Paper>
 
               <Paper className={classes.card}>
+                <Typography variant="overline">
+                  Destination
+                </Typography>
                 {validDestination && (
                   <Typography variant="body1" className={classes.title}>
                     {validDestination.geocoded_address && validDestination.geocoded_address.formatted_address}
                   </Typography>
-                ) || (
-                  <Typography color="textSecondary" variant="overline" className={classes.title}>Destination</Typography>
                 )}
               </Paper>
 
