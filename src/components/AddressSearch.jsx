@@ -9,17 +9,12 @@ import TextField from '@material-ui/core/TextField' // eslint-disable-line no-un
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container' // eslint-disable-line no-unused-vars
 import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 import ConfirmAddress from './ConfirmAddress' // eslint-disable-line no-unused-vars
 import { addOrigin, addDestination, checkAddress } from '../redux/actions'
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    padding: theme.spacing(3, 2),
-    position: 'absolute',
-    top: '25%',
-    flexGrow: 1
-  },
   container: {
     height: '100%',
     width: '100%',
@@ -27,6 +22,12 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center'
+  },
+  root: {
+    padding: theme.spacing(3, 2),
+    position: 'absolute',
+    top: '25%',
+    flexGrow: 1
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -61,7 +62,8 @@ const AddressSearch = (props: Props) => {
     <Grid container spacing={2}>
       <div className={classes.container}>
         <Paper className={classes.root}>
-
+          <Typography variant="h5"> Get Route
+          </Typography>
           <TextField
             required
             id="standard-required"
