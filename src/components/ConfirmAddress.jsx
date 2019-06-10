@@ -47,7 +47,8 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main
   },
   progress: {
-    position: 'relative',
+    position: 'absolute',
+    zIndex: 1500,
     top: 0
   }
 }))
