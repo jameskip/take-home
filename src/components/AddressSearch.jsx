@@ -56,7 +56,7 @@ const AddressSearch = (props: Props) => {
 
   return (
 
-    <Container maxWidth="md">
+    <div className={classes.container}>
       <Paper className={classes.root}>
 
         <TextField
@@ -88,7 +88,7 @@ const AddressSearch = (props: Props) => {
         </Button>
 
       </Paper>
-    </Container>
+    </div>
   )
 }
 
