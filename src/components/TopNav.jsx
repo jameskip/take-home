@@ -56,11 +56,7 @@ const TopNav = props => {
 
           <IconButton component={RouterLink} to={'/'} color="secondary" edge="start" className={classes.menuButton} aria-label="Menu"><Home /></IconButton>
 
-          {user && ( // eslint-disable-line
-            <Typography variant="overline" className={classes.title}>{company.name}</Typography>
-          ) || ( // eslint-disable-line
-            <Typography variant="overline" className={classes.title}></Typography> // This is used to hold a spot for the users name
-          )}
+          {company && (<Typography variant="overline" className={classes.title}>{company.name}</Typography>)}
 
           {user && (
             <div>
