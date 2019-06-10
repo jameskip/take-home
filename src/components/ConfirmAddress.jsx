@@ -63,7 +63,7 @@ const ConfirmAddress = (props) => {
 
   return (
     <>
-      {!validOrigin && <LinearQuery className={classes.progress} />}
+      {!(validOrigin || validDestination) && <LinearQuery className={classes.progress} />}
       <Grid container spacing={2}>
 
         <Grid item xs={12}>

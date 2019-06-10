@@ -57,7 +57,7 @@ const MapModal = props => {
 
   return (
     <>
-        {!loaded && <LinearQuery className={classes.progress} />}
+      {!loaded && <LinearQuery className={classes.progress} />}
       <Paper className={classes.container}>
         {renderModal(urlQuery)}
       </Paper>
