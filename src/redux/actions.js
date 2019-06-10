@@ -49,14 +49,14 @@ export const checkAddress = (origin, destination) => {
       .then(values => {
         combinedData['validOrigin'] = values[0]
         combinedData['validDestination'] = values[1]
-        return dispatch(validateAddress(combinedData))
+        dispatch(validateAddress(combinedData))
+        if (values[0].error || values[1].error) alert('Please check your inputs and try again.')
       })
       .catch(e => console.error(e))
   }
 }
 
 export const getUser = () => {
-  console.log('GETTING USER')
   return dispatch => {
     const url = USER_AUTH_URL
     const token = AUTH_TOKEN

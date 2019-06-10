@@ -7,11 +7,11 @@ import Paper from '@material-ui/core/Paper' // eslint-disable-line no-unused-var
 import Button from '@material-ui/core/Button' // eslint-disable-line no-unused-vars
 import TextField from '@material-ui/core/TextField' // eslint-disable-line no-unused-vars
 import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container' // eslint-disable-line no-unused-vars
 
 import ConfirmAddress from './ConfirmAddress' // eslint-disable-line no-unused-vars
-import { addOrigin, addDestination, checkAddress, getUser } from '../redux/actions'
+import { addOrigin, addDestination, checkAddress } from '../redux/actions'
 
-// CSS Styles
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
@@ -37,7 +37,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-// Type Checking
 type Props = {
   dispatch: (any) => void,
   state: { originAddress: string, destinationAddress: string, addressReducer: () => void, userReducer: () => void }
@@ -45,19 +44,19 @@ type Props = {
 
 const AddressSearch = (props: Props) => {
   const { dispatch, state } = props
-  const { user } = props.state.userReducer.user
-
   const classes = useStyles()
+  const [disabled, setDisabled] = React.useState(true)
 
-  // Event Handlers
-  const handleChange = (name: string) => event => name === 'origin' ? dispatch(addOrigin(event.target.value)) : dispatch(addDestination(event.target.value))
   const handleClick = event => dispatch(checkAddress(state.addressReducer.originAddress, state.addressReducer.destinationAddress))
-
-  // Lifecycle Hooks
-  useEffect(() => { if (!user) dispatch(getUser()) }, [user, dispatch]) // optional second argument provided to useEffect() in order to only run on mount and unmount
+  const handleChange = (name: string) => event => {
+    name === 'origin' ? dispatch(addOrigin(event.target.value)) : dispatch(addDestination(event.target.value))
+    disableButton()
+  }
+  const disableButton = () => state.addressReducer.originAddress.length < 1 || state.addressReducer.destinationAddress < 1 ? setDisabled(true) : setDisabled(false)
 
   return (
-    <div id="main-contain" className={classes.container}>
+
+    <Container maxWidth="md">
       <Paper className={classes.root}>
 
         <TextField
@@ -83,12 +82,13 @@ const AddressSearch = (props: Props) => {
         <Button
           onClick={handleClick} to='/confirm'
           component={Link} className={classes.button}
+          disabled={disabled}
         >
             Search
         </Button>
 
       </Paper>
-    </div>
+    </Container>
   )
 }
 
